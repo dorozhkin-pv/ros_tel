@@ -23,6 +23,7 @@ export default new Vuex.Store({
   	    {img: '', name: 'Стекло'}
   	],
   	checked: [],
+  	tags: [],
   	auth: false
   },
   getters: {
@@ -35,17 +36,29 @@ export default new Vuex.Store({
   	typeOfGarbage(state){
   		return state.typeOfGarbage;
   	},
-	  checks(state){
-  		return state.checked;
-	  }
+	checks(state){
+		return state.checked;
+	},
+	tags(state){
+		return state.tags;
+	}
   },
   mutations: {
   	setTypeOfGarbage(state, data){
   		state.checked = data;
   		console.log(state.checked);
-  	}
+  	},
+  	setTags(state, data){
+        
+        state.tags = data.data;
+        console.log('tags', data.data);
+    }
   },
   actions: {
-
+  	addTag(store){
+  		fetch("https://trashbin.dev.sa-wd.ru/api/v1/tag")
+  			.then(response => response.json())
+  			.then(data => store.commit('setTags', data));
+  	}
   }
 })

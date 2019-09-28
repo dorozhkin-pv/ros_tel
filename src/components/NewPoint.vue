@@ -1,24 +1,34 @@
 <template>
     <div class="home">
-        <h1 class="main-title">Проект Smart Garbage</h1>
-        <p cLASS="slogan">Утилизируйте мусор - спасайте планету - получайте бонусы и подарки</p>
-        <p>Выберите тип мусора для утилизации</p>
+        <h1 class="main-title">Организации-утилизатору</h1>
+        <p>Добавление нового пункта утилизации</p>
+        <div class="point pointone"> 1. Выберите типы перерабатываемого мусора </div>
         <div class="my-form mt-1">
             <div class="flexmy">
                 <div class="form-check" :class="(checked.indexOf(item.tag_id) > -1 ? 'checked' : 'not-checked')+' '+item.image" v-for="(item, index) in tags" @click="checkButton(item.tag_id)">
-                    <div class="help" @click.preventDefault="header={header: item.name, description: item.description}">?</div>
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn-full" @click="goToCard">Найти</button>
+        <div class="point pointtwo"> 2. Выберите тип нового пункта </div>
+        <select class="form-control form-control-lg">
+        <option>Пункт утилизации</option>
+        <option>Организация по вывозу мусора</option>
+        <option>Одиночная мусорка</option>
+        </select>
+
+        <div class="point pointhree"> 3. Укажите режим работы </div>
+        <label class="pointtwo_time">Начало работы<input type="time"></label>
+        <label class="pointtwo_time">Завершение работы<input type="time"></label>
+
+        <button type="submit" class="btn btn-primary" @click="goToCard">Перейти к шагу 4</button>
+
 
         <div class="description" v-if="header">
-            
-            <span v-html="header.description"></span>
+            <h1>{{ header.header }}</h1>
             <div class="close" @click="header = false;">X</div>
 
-            
+            <p>{{ header.description }}</p>
         </div>
 
     </div>
@@ -62,6 +72,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+    
     .home {
         height:100%;
     }
@@ -173,8 +184,8 @@ export default {
     .btn-full {
         width: 100%;
         height: 50px;
-        color: white;
-        background-color: #013220;
+        color: black;
+        background-color: green;
         position: absolute;
         bottom: 0;
         left:0;
@@ -204,7 +215,6 @@ export default {
         left: 0;
         top: 0;
         background-color: white;
-        overflow: auto;
     }
 
     .close {
@@ -212,11 +222,28 @@ export default {
         left: 90%;
         top: 10px;
     }
+    .pointtwo_start, .pointtwo_finish {
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    .pointtwo_time {
+        text-align: left;
+        padding-left: 20px;
+        width: 100%;
+        input[type="time"] {
+            margin-left: 10px;
+            width: 30%;
+            float: right;
+            margin-right: 20px;
+        }
+    }
 
-    .slogan {
-        color:#013220;
-        font-weight: bold;
-       padding: 0 2px;
-       margin-bottom: 20px;
+    
+
+    .point {
+        text-align: left;
+        padding-left: 20px;
+        margin-top: 20px;
+        padding-bottom: 5px;
     }
 </style>

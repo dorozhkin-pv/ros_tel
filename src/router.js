@@ -14,6 +14,8 @@ import Policy from './components/Policy.vue'
 import Article from './components/Article.vue'
 import Auth from './components/Auth.vue'
 import Utillist from './components/UtilList.vue'
+import Legend from './components/Legend.vue'
+import NewPoint from './components/NewPoint.vue'
 
 export default new Router({
   routes: [
@@ -72,6 +74,16 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: Utillist
+    },
+    {
+      path: '/legend',
+      name: 'legend',
+      component: Legend
+    },
+    {
+      path: '/new-point',
+      name: 'new-point',
+      component: NewPoint
     }
   ]
 })
@@ -80,3 +92,4 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      

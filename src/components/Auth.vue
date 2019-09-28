@@ -14,7 +14,7 @@
                 <a href="#" class="forget_password_link link">Забыли пароль?</a>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Войти</button>
         </form>
         <div class="registration_link_container">
             <a href="#" class="registration_link link">Зарегистрироваться</a>

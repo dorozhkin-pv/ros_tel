@@ -7,7 +7,7 @@
                 
                 <div class="mycontainer">
                     <button type="button" class="btn btn-success one" @click="goToList">Мне нужно вывозить мусор</button>
-                    <button type="button" class="btn btn-success two">Я - организация утилизатор</button>
+                    <button type="button" class="btn btn-success two" @click="goToNewPoint">Я - организация утилизатор</button>
                 </div>  
                 <p>В приложении "Утилизируй мусор" вы можете</p>
                 <ul>
@@ -24,6 +24,9 @@ export default {
   methods: {
     goToList(){
         this.$router.push({ path: 'list' });
+    },
+    goToNewPoint(){
+        this.$router.push({ path: 'new-point' });
     }
   }
 }

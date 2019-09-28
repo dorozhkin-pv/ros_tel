@@ -44,21 +44,10 @@
   background-color:rgba(0, 0, 0, 0.3);
   top:66px;
   overflow: auto;
-
+  z-index: 1000;
 }
-#nav {
-  padding: 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width:100%;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #fff;
-    }
-  }
+.navbar {
+    z-index: 1000;
 }
 .logo {
     width: 30px;
@@ -78,13 +67,9 @@ h1.main-title {
     width: 40px;
     padding-right:10px;
 }
-
-button.navbar-toggler {
-    
-}
 /* ------------------------------Лера------------------------------- */
     body {
-        background-color: #d0f0c0;
+        /* background-color: #d0f0c0; */
     }
 
     .btn.btn-primary {

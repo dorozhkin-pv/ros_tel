@@ -31,8 +31,13 @@
 				<div class="icon" v-for="(icon, index) in showedTrashBin.trash_bin_tags"> {{ icon.tag.name }} </div>
 			</div>
 			<p>{{ showedTrashBin.description }}</p>
-
+			
 		</div>
+		<div class="question" @click="goToLegend"></div>
+		<div class="heart">
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="heart-img svg-inline--fa fa-heart fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#c10000" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg>
+		</div>
+		
 	</div>
 </template>
 
@@ -109,6 +114,9 @@ export default {
 
     },
     methods: {
+    	goToLegend(){
+        	this.$router.push({ path: 'legend' });
+        },
         loadTrashBins(tags){
             let append = '';
             if(tags.length){
@@ -311,5 +319,38 @@ export default {
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
+	}
+	.question {
+		position: absolute;
+		top: 23%;
+		right: 10px;
+		width: 40px;
+		height: 40px;
+		background-color: red;
+		border-radius: 50%;
+		background: url('../img/question.png') no-repeat;
+		background-size: 115%;
+		border: 2px solid #013220;
+		cursor: pointer;
+		background-position: -3px 0px;
+		z-index: 0;
+	}
+	.heart {
+		position: absolute;
+		top: 33%;
+		right: 10px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		border: 2px solid #c10000;
+		cursor: pointer;
+		z-index: 0;
+		&-img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 25px;
+		}
 	}
 </style>
