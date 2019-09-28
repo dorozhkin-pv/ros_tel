@@ -30,13 +30,16 @@ export default {
         return {
             selected: this.$store.getters.typeOfGarbage,
             checked: [],
-            tags: [],
             header: false
         }
     },
+    computed:{
+      tags(){
+          return this.$store.getters.tags;
+      }
+    },
     created() {
         this.$store.dispatch('addTag');
-        this.tags = this.$store.getters.tags;
     },
     methods: {
         checkButton(value){

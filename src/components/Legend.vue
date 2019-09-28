@@ -13,11 +13,14 @@
 
 <script>
 export default {
-  data() {
-  	return {
-  		tags: this.$store.getters.tags
-  	}
-  }
+  	computed: {
+      tags(){
+          return this.$store.getters.tags;
+	  }
+	},
+    created() {
+        this.$store.dispatch('addTag');
+    }
 }
 </script>
 
