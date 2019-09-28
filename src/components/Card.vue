@@ -249,10 +249,67 @@ export default {
 	.bin {
 		background-color: rgba(255,255,255, 0.4);
 		font-size:15px;
+		margin-bottom:30px;
 	}
 
 	.map-button {
 		width:50%;
 		height:50px;
+		font-size: 32px;
+	}
+
+	.aero {
+		background-image: url('../assets/trash/aero.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.thermo {
+		background-image: url('../assets/trash/thermo.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.battery {
+		background-image: url('../assets/trash/battery.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.chemy {
+		background-image: url('../assets/trash/chemy.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.metal {
+		background-image: url('../assets/trash/metal.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.organic {
+		background-image: url('../assets/trash/oraganic.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.paper {
+		background-image: url('../assets/trash/paper.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.plastic {
+		background-image: url('../assets/trash/plastic.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.glass {
+		background-image: url('../assets/trash/glass.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
 	}
 </style>
