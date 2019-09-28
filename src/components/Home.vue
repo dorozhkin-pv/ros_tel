@@ -32,7 +32,7 @@ export default {
         }
     },
     mounted() {
-        fetch("/api/v1/tag").then(response => response.json()).then(data => this.setTags(data.data));
+        fetch("https://trashbin.dev.sa-wd.ru/api/v1/tag").then(response => response.json()).then(data => this.setTags(data.data));
     },
     methods: {
         checkButton(value){

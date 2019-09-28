@@ -114,7 +114,7 @@ export default {
             if(tags.length){
                 append = '&where[]=["trashBinTags.tag_id","in",['+tags.filter(a=>a).join(",")+']]';
 			}
-            fetch('/api/v1/trashBin?order[]=["distance","asc"]&scope=["addDistance,position,'+this.lng+','+this.lat+',distance"]&with=["trashBinTags.tag"]'+append).then(response => response.json()).then(data => {
+            fetch('https://trashbin.dev.sa-wd.ru/api/v1/trashBin?order[]=["distance","asc"]&scope=["addDistance,position,'+this.lng+','+this.lat+',distance"]&with=["trashBinTags.tag"]'+append).then(response => response.json()).then(data => {
                 this.trashBins = data.data;
                 this.map.removeObjects(this.map.getObjects ());
                 this.trashBins.map(trashBin => this.addDomMarker(trashBin));
