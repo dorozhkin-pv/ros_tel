@@ -5,14 +5,14 @@
         <h3>Выберите тип мусора для утилизации</h3>
 
         <form @submit.prevent>
-            <div class="form-check" v-for="(item, index) in selected">
+            <div class="form-check" v-for="(item, index) in tags">
                 <input class="form-check-input"
-                       :id="index"
+                       :id="item.tag_id"
                        :key="index"
                        type="checkbox"
-                       :value="item"
-                       @change="onChange(index, $event.target)">
-                <label class="form-check-label" :for="index">{{ item }}
+                       :value="item.tag_id"
+                       @change="onChange(item.tag_id, $event.target)">
+                <label class="form-check-label" :for="index">{{ item.name }}
                 </label>
             </div>
          
@@ -26,12 +26,16 @@ export default {
   data() {
         return {
             selected: this.$store.getters.typeOfGarbage,
-            checked: []
+            checked: [],
+            tags: []
         }
+    },
+    mounted() {
+        fetch("/api/v1/tag").then(response => response.json()).then(data => this.setTags(data.data));
     },
     methods: {
         onChange(index, event){
-            this.$set(this.checked, index, event.checked);  //отослать на сервер
+            this.$set(this.checked, index, event.value);  //отослать на сервер
 
             console.log(this.checked);
 
@@ -39,6 +43,11 @@ export default {
         },
         goToCard(){
             this.$router.push({ path: 'card' });
+        },
+        setTags(tags){
+//            this.$set(this.tags, tags);
+            console.log('tags', tags);
+            this.tags = tags;
         }
     }
 }

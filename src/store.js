@@ -29,7 +29,10 @@ export default new Vuex.Store({
   	},
   	typeOfGarbage(state){
   		return state.typeOfGarbage;
-  	}
+  	},
+	  checks(state){
+  		return state.checked;
+	  }
   },
   mutations: {
   	setTypeOfGarbage(state, data){
