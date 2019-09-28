@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active" v-for="(nav, index) in navbarNav">
-                <span><router-link :to="nav.page" class="my-link" :key="index">{{ nav.name }}</router-link></span>
+                <span><router-link :to="nav.page" class="my-link" v-if="!nav.auth || (nav.auth && user.user_id)" :key="index">{{ nav.name }}</router-link></span>
           </li>
         </ul>
       </div>
@@ -25,9 +25,27 @@
       data() {
         return {
             navbarNav: this.$store.getters.navbarNav,
+
             links: []
         }
-      }
+      },
+        computed: {
+
+              user(){ return this.$store.getters.auth.user;}
+
+        },
+        methods: {
+            current(){
+                fetch('https://trashbin.dev.sa-wd.ru/api/v1/auth/current?api_token='+localStorage.getItem('api_token'))
+                    .then(a=>a.json()).then(data => {
+                    console.log('user', data);
+                    this.$store.commit('setAuth', data);
+                });
+            }
+        },
+        updated(){
+//          this.current();
+        }
     }
 </script>
 

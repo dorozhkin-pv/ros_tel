@@ -9,6 +9,10 @@
 			<div ref="map" v-bind:style="{ width: '100%', height: '700px' }"></div>
 		</div>
 
+		<div class="bottom-text">
+			<input type="text" @keyup="find()" v-model="findText" placeholder="Введите тег (аккумулятор, ТБО и тд)">
+		</div>
+
 		<div style="height: 100%" v-show="block == 'list'">
 			<div class="bin" v-for="(bin, index) in trashBins" @click.prevent="setBin(bin)">
 				<div class="bin-header">{{ bin.name }}</div>
@@ -62,7 +66,9 @@ export default {
 		  description: '',
 		  name: '',
 		  showedTrashBin: false,
-		  block: 'map'
+		  block: 'map',
+		  timer: null,
+		  findText: ''
       };
   },
     mounted() {
@@ -117,10 +123,14 @@ export default {
     	goToLegend(){
         	this.$router.push({ path: 'legend' });
         },
-        loadTrashBins(tags){
+        loadTrashBins(tags, text){
             let append = '';
-            if(tags.length){
+            if(tags.length && !text){
                 append = '&where[]=["trashBinTags.tag_id","in",['+tags.filter(a=>a).join(",")+']]';
+			}
+			if(text){
+                append = append + '&where[]=["trashBinTags.tag.name","like","'+encodeURI('%'+text+'%')+'"]';
+                console.log('append',append);
 			}
             fetch('https://trashbin.dev.sa-wd.ru/api/v1/trashBin?order[]=["distance","asc"]&scope=["addDistance,position,'+this.lng+','+this.lat+',distance"]&with=["trashBinTags.tag"]'+append).then(response => response.json()).then(data => {
                 this.trashBins = data.data;
@@ -139,6 +149,18 @@ export default {
             });
 
 		},
+
+		find(){
+            if (this.timer) {
+                clearTimeout(this.timer);
+                this.timer = null;
+            }
+            this.timer = setTimeout(() => {
+                console.log(this.findText);
+                this.loadTrashBins(this.data, this.findText);
+            }, 800);
+		},
+
 		setBin(domIcon) {
 			this.showedTrashBin = domIcon.trashBin || domIcon;
 		},
@@ -352,5 +374,14 @@ export default {
 			transform: translate(-50%, -50%);
 			width: 25px;
 		}
+	}
+
+	.bottom-text {
+		position: absolute;
+		bottom:0;
+		width:100%;
+	}
+	.bottom-text input {
+		width:100%;
 	}
 </style>
