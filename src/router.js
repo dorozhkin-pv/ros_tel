@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueQrcodeReader from "vue-qrcode-reader";
 
 Vue.use(Router)
+Vue.use(VueQrcodeReader)
 
 import Home from './components/Home.vue'
 import Card from './components/Card.vue'
@@ -14,6 +16,8 @@ import Policy from './components/Policy.vue'
 import Article from './components/Article.vue'
 import Auth from './components/Auth.vue'
 import Utillist from './components/UtilList.vue'
+import Qr from './components/Qr.vue'
+import Social from './components/Social.vue'
 
 export default new Router({
   routes: [
@@ -72,7 +76,17 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: Utillist
-    }
+    },
+      {
+          path: '/qr',
+          name: 'qr',
+          component: Qr
+      },
+      {
+          path: '/soc',
+          name: 'soc',
+          component: Social
+      }
   ]
 })
 
