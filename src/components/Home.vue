@@ -4,20 +4,24 @@
 
         <h3>Выберите тип мусора для утилизации</h3>
 
-        <form @submit.prevent>
-            <div class="form-check" v-for="(item, index) in selected">
-                <input class="form-check-input"
-                       :id="index"
-                       :key="index"
-                       type="checkbox"
-                       :value="item"
-                       @change="onChange(index, $event.target)">
-                <label class="form-check-label" :for="index">{{ item }}
-                </label>
-            </div>
-         
-            <button type="submit" class="btn btn-primary" @click="goToCard">Найти</button>
-        </form>
+        <div class="my-form mt-5">
+            <form @submit.prevent>
+                <div class="form-check" v-for="(item, index) in selected">
+                    <div class="my-img" :style="'background-position: 30px 30px'"></div>
+                    <input class="form-check-input"
+                           :id="index"
+                           :key="index"
+                           type="checkbox"
+                           :value="item"
+                           @change="onChange(index, $event.target)">
+                    <label class="form-check-label" :for="index">{{ item }}
+                    </label>
+                </div>
+             
+                <button type="submit" class="btn btn-primary mt-2" @click="goToCard">Найти</button>
+            </form>
+        </div>
+        
     </div>
 </template>
 
@@ -48,7 +52,28 @@ export default {
 <style scoped lang="scss">
     .home {
         height: calc(100vh - 56px);
-        background: url('../assets/main.jpg') no-repeat;
+        background: url('../assets/main.jpg') no-repeat center;
         background-size: cover;
+    }
+    .my-img {
+        width: 30px;
+        height: 50px;
+        margin-right: 25px;
+        background: url('../assets/trash/polee-priviki.jpg');
+        background-position: 0px 0px;
+        background-size: 200px;
+    }
+    .my-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    .btn {
+        /* align-self: center; */
     }
 </style>
