@@ -12,9 +12,9 @@
                            :id="index"
                            :key="index"
                            type="checkbox"
-                           :value="item"
+                           :value="item.name"
                            @change="onChange(index, $event.target)">
-                    <label class="form-check-label" :for="index">{{ item }}
+                    <label class="form-check-label" :for="index">{{ item.name }}
                     </label>
                 </div>
              
@@ -56,9 +56,10 @@ export default {
         background-size: cover;
     }
     .my-img {
+        position: absolute;
+        left: -40px;
         width: 30px;
         height: 50px;
-        margin-right: 25px;
         background: url('../assets/trash/polee-priviki.jpg');
         background-position: 0px 0px;
         background-size: 200px;
@@ -72,6 +73,9 @@ export default {
             flex-direction: column;
             align-items: flex-start;
         }
+    }
+    .form-check {
+        margin-bottom: 30px;
     }
     .btn {
         /* align-self: center; */

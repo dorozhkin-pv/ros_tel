@@ -16,10 +16,10 @@ export default new Vuex.Store({
   	    {page: 'policy', name: 'Политика конфидециальност'}
   	],
   	typeOfGarbage: [
-  	    'Пластик',
-  	    'Бумага',
-  	    'Бытовые отходы',
-  	    'Стекло'
+  	    {img: '', name: 'Пластик'},
+  	    {img: '', name: 'Бумага'},
+  	    {img: '', name: 'Бытовые отходы'},
+  	    {img: '', name: 'Стекло'}
   	],
   	checked: []
   },
