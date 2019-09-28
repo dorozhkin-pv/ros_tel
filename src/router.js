@@ -11,6 +11,7 @@ import Company from './components/Company.vue'
 import Sets from './components/Sets.vue'
 import Callback from './components/Callback.vue'
 import Policy from './components/Policy.vue'
+import Article from './components/Article.vue'
 
 export default new Router({
   routes: [
@@ -53,6 +54,11 @@ export default new Router({
       path: '/policy',
       name: 'policy',
       component: Policy
+    },
+    {
+      path: '/article',
+      name: 'article',
+      component: Article
     }
   ]
 })
