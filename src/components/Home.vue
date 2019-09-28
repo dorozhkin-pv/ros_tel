@@ -7,7 +7,10 @@
         <div class="my-form mt-5">
             <form @submit.prevent>
                 <div class="form-check" v-for="(item, index) in selected">
-                    <div class="my-img" :style="'background-position: 30px 30px'"></div>
+                    <router-link to="article">
+                        <div class="my-img" :style="'background-position: 30px 30px'"></div>
+                    </router-link>
+                    
                     <input class="form-check-input"
                            :id="index"
                            :key="index"
