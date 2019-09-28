@@ -38,6 +38,11 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: calc(100vh);
+  background: url('./assets/main2.jpg') no-repeat center;
+  background-size: cover;
+  background-color:rgba(0, 0, 0, 0.3);
+  top:66px;
 }
 #nav {
   padding: 30px;
