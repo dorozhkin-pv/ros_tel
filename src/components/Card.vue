@@ -1,7 +1,25 @@
 <template>
 	<div>
-		<h1>Карта</h1>
-		<div ref="map" v-bind:style="{ width: '100%', height: '500px' }"></div>
+		<div class="buttons-block">
+			<div class="map-button" @click.prevent="block = 'map'">Карта</div>
+			<div class="map-button" @click.prevent="block = 'list'">Список</div>
+		</div>
+
+		<div style="height: 100%;" v-show="block == 'map'">
+			<div ref="map" v-bind:style="{ width: '100%', height: '700px' }"></div>
+		</div>
+
+		<div style="height: 100%" v-show="block == 'list'">
+			<div class="bin" v-for="(bin, index) in trashBins" @click.prevent="setBin(bin)">
+				<div class="bin-header">{{ bin.name }}</div>
+				<div class="bin-distance">{{ (bin.distance * 111.195).toFixed(2) }}км</div>
+				<div class="bin-how_to_find">{{ bin.how_to_find }} </div>
+				<div class="bin-icons">
+					Принимает:
+					<div class="bin-icon" v-for="(icon, index) in bin.trash_bin_tags"> {{ icon.tag.name }} </div>
+				</div>
+			</div>
+		</div>
 
 		<div class="description" v-if="showedTrashBin">
 			<h1>{{ showedTrashBin.name }}</h1>
@@ -38,7 +56,8 @@ export default {
 		  lng: '',
 		  description: '',
 		  name: '',
-		  showedTrashBin: false
+		  showedTrashBin: false,
+		  block: 'map'
       };
   },
     mounted() {
@@ -60,6 +79,27 @@ export default {
                 }
             );
 
+//            this.map.addEventListener('dragend',  (evt) => {
+//                var coord = this.map.screenToGeo(evt.currentPointer.viewportX,
+//                    evt.currentPointer.viewportY);
+//                console.log('Clicked at ' + Math.abs(coord.lat.toFixed(4)) +
+//                    ((coord.lat > 0) ? 'N' : 'S') +
+//                    ' ' + Math.abs(coord.lng.toFixed(4)) +
+//                    ((coord.lng > 0) ? 'E' : 'W'));
+//                this.lat = coord.lat;
+//                this.lng = coord.lng;
+//                this.loadTrashBins(this.data);
+//            });
+
+            this.map.addEventListener('tap',  (evt) => {
+                var coord = this.map.screenToGeo(evt.currentPointer.viewportX,
+                    evt.currentPointer.viewportY);
+
+                this.lat = coord.lat;
+                this.lng = coord.lng;
+                this.loadTrashBins(this.data);
+            });
+
             this.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
 
 // Create the default UI components
@@ -74,15 +114,25 @@ export default {
             if(tags.length){
                 append = '&where[]=["trashBinTags.tag_id","in",['+tags.filter(a=>a).join(",")+']]';
 			}
-            fetch('/api/v1/trashBin?scope=["addDistance,position,'+this.lng+','+this.lat+',distance"]&with=["trashBinTags.tag"]'+append).then(response => response.json()).then(data => {
+            fetch('/api/v1/trashBin?order[]=["distance","asc"]&scope=["addDistance,position,'+this.lng+','+this.lat+',distance"]&with=["trashBinTags.tag"]'+append).then(response => response.json()).then(data => {
                 this.trashBins = data.data;
+                this.map.removeObjects(this.map.getObjects ());
                 this.trashBins.map(trashBin => this.addDomMarker(trashBin));
+                this.addDomMarker({
+					position: {
+					    lat: this.lat,
+						lng: this.lng
+					},
+					name: 'Я',
+					distance: 0,
+					noEvents: true
+				});
 
             });
 
 		},
 		setBin(domIcon) {
-			this.showedTrashBin = domIcon.trashBin;
+			this.showedTrashBin = domIcon.trashBin || domIcon;
 		},
 		setDataForPopup(desc, name){
             this.description = desc;
@@ -106,11 +156,12 @@ export default {
             innerElement.style.color = 'red';
             innerElement.style.backgroundColor = 'blue';
             innerElement.style.border = '2px solid black';
-            innerElement.style.font = 'normal 12px arial';
-            innerElement.style.lineHeight = '12px'
+            innerElement.style.borderRadius = '30px';
+            innerElement.style.font = 'normal 18px arial';
+            innerElement.style.lineHeight = '20px';
 
-            innerElement.style.paddingTop = '2px';
-            innerElement.style.paddingLeft = '4px';
+            innerElement.style.paddingTop = '15px';
+            innerElement.style.paddingLeft = '15px';
             innerElement.style.width = '20px';
             innerElement.style.height = '20px';
 
@@ -122,7 +173,7 @@ export default {
             outerElement.appendChild(innerElement);
 
             // Add text to the DOM element
-            innerElement.innerHTML = marker.name + ( ", "+ (marker.distance * 111.195).toFixed(2) + "км" );
+            innerElement.innerHTML = marker.name + (marker.noEvents ? '' : ( ", "+ (marker.distance * 111.195).toFixed(2) + "км" ));
 
             function changeOpacity(evt) {
                 evt.target.style.opacity = 0.6;
@@ -140,7 +191,10 @@ export default {
                 onAttach: (clonedElement, domIcon, domMarker) => {
                     clonedElement.addEventListener('mouseover', changeOpacity);
                     clonedElement.addEventListener('mouseout', changeOpacityToOne);
-                    clonedElement.addEventListener('click', () => { this.setBin(domIcon); })
+                    if(!marker.noEvents){
+                        clonedElement.addEventListener('click', () => { this.setBin(domIcon); })
+					}
+
                 },
                 // the function is called every time marker leaves the viewport
                 onDetach: (clonedElement, domIcon, domMarker) => {
@@ -179,5 +233,26 @@ export default {
 		position: absolute;
 		left: 90%;
 		top: 10px;
+	}
+
+	.buttons-block {
+		display: flex;
+		height:50px;
+		justify-content: center;
+		align-content: center;
+	}
+
+	.buttons-block.checked {
+		opacity: 0.5;
+	}
+
+	.bin {
+		background-color: rgba(255,255,255, 0.4);
+		font-size:15px;
+	}
+
+	.map-button {
+		width:50%;
+		height:50px;
 	}
 </style>
