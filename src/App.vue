@@ -43,9 +43,15 @@
   background-size: cover;
   background-color:rgba(0, 0, 0, 0.3);
   top:66px;
+  overflow: auto;
+
 }
 #nav {
   padding: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
   a {
     font-weight: bold;
     color: #2c3e50;
