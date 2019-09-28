@@ -12,13 +12,16 @@ import Sets from './components/Sets.vue'
 import Callback from './components/Callback.vue'
 import Policy from './components/Policy.vue'
 import Article from './components/Article.vue'
+import Auth from './components/Auth.vue'
+import Utillist from './components/UtilList.vue'
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home/*,
+      redirect: { name: 'auth' }*/
     },
     {
       path: '/card',
@@ -59,6 +62,16 @@ export default new Router({
       path: '/article',
       name: 'article',
       component: Article
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: Utillist
     }
   ]
 })

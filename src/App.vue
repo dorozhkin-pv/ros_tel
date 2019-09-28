@@ -2,14 +2,14 @@
   <div id="app">
     <nav class="d-flex navbar navbar-light bg-light">
       <a class="navbar-brand order-2" href="#"><img class="navbar-brand logo" src="./assets/logo.png"></img></a>
-      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active" v-for="(nav, index) in navbarNav">
-                <router-link :to="nav.page" class="my-link" :key="index">{{ nav.name }}</router-link>
+                <span><router-link :to="nav.page" class="my-link" :key="index">{{ nav.name }}</router-link></span>
           </li>
         </ul>
       </div>
@@ -27,12 +27,7 @@
             navbarNav: this.$store.getters.navbarNav,
             links: []
         }
-      },
-        computed:{
-            currentRouteName() {
-                return this.$route.name;
-            }
-        }
+      }
     }
 </script>
 

@@ -6,8 +6,8 @@
                 <p>Выберите свою роль</p>
                 
                 <div class="mycontainer">
-                    <button type="button" class="btn btn-success one">Я организация-утилизатор</button>
-                    <button type="button" class="btn btn-success two">Мне нужны вывозы мусора</button>
+                    <button type="button" class="btn btn-success one" @click="goToList">Мне нужно вывозить мусор</button>
+                    <button type="button" class="btn btn-success two">Я - организация утилизатор</button>
                 </div>  
                 <p>В приложении "Утилизируй мусор" вы можете</p>
                 <ul>
@@ -21,7 +21,11 @@
 
 <script>
 export default {
-  props: {}
+  methods: {
+    goToList(){
+        this.$router.push({ path: 'list' });
+    }
+  }
 }
 </script>
 
