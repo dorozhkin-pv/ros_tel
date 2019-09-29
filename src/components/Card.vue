@@ -6,7 +6,7 @@
 		</div>
 
 		<div style="height: 100%;" v-show="block == 'map'">
-			<div ref="map" v-bind:style="{ width: '100%', height: '700px' }"></div>
+			<div ref="map" v-bind:style="{ width: '100%', height: '80vh' }"></div>
 		</div>
 
 		<div class="bottom-text">
@@ -184,7 +184,7 @@ export default {
             outerElement.style.cursor = 'default';
 
             innerElement.style.color = 'red';
-            innerElement.style.backgroundColor = 'blue';
+            innerElement.style.backgroundColor = marker.noEvents ? 'lightblue' : (['', 'red', 'green', 'blue', 'yellow', 'red', 'white', 'black', 'grey', 'darkgreen'][marker.trash_bin_tags[0].tag_id]);
             innerElement.style.border = '2px solid black';
             innerElement.style.borderRadius = '30px';
             innerElement.style.font = 'normal 18px arial';
