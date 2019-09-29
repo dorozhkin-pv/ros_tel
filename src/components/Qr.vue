@@ -27,7 +27,7 @@ export default {
           console.log('qr',str);
           fetch('https://trashbin.dev.sa-wd.ru/api/v1/user/'+this.$store.getters.auth.user.user_id+'?api_token='+localStorage.getItem('api_token'), {
               method: 'PUT',
-              body: new URLSearchParams({scores: str})
+              body: new URLSearchParams({scores: (parseInt(str))+(parseInt(this.user.scores))})
 		  }).then(data => data.json()).then(data => {
 		      this.qrEnabled = 0;
 		      this.scores = data.scores;

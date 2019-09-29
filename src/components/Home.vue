@@ -6,7 +6,7 @@
         <div class="my-form mt-1">
             <div class="flexmy">
                 <div class="form-check" :class="(checked.indexOf(item.tag_id) > -1 ? 'checked' : 'not-checked')+' '+item.image" v-for="(item, index) in tags" @click="checkButton(item.tag_id)">
-                    <div class="help" @click.prevent="header={header: item.name, description: item.description}">?</div>
+                    <div class="help" v-on:click.stop="header={header: item.name, description: item.description}">?</div>
                 </div>
             </div>
         </div>
