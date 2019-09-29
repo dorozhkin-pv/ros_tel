@@ -30,6 +30,7 @@
 			<div class="close" @click="showedTrashBin = false;">X</div>
 			<div class="distance">{{ (showedTrashBin.distance * 111.195).toFixed(2) }}км</div>
 			<div class="how_to_find">{{ showedTrashBin.how_to_find }} </div>
+			<div class="scores">{{ showedTrashBin.scores }} баллов</div>
 			<div class="icons">
 				Принимает:
 				<div class="icon" v-for="(icon, index) in showedTrashBin.trash_bin_tags"> {{ icon.tag.name }} </div>
