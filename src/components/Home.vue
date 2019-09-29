@@ -6,7 +6,7 @@
         <div class="my-form mt-1">
             <div class="flexmy">
                 <div class="form-check" :class="(checked.indexOf(item.tag_id) > -1 ? 'checked' : 'not-checked')+' '+item.image" v-for="(item, index) in tags" @click="checkButton(item.tag_id)">
-                    <div class="help" @click.preventDefault="header={header: item.name, description: item.description}">?</div>
+                    <div class="help" @click.prevent="header={header: item.name, description: item.description}">?</div>
                 </div>
             </div>
         </div>
@@ -178,9 +178,9 @@ export default {
         height: 50px;
         color: white;
         background-color: #013220;
-        position: absolute;
+        /* position: absolute;
         bottom: 0;
-        left:0;
+        left:0; */
     }
 
     .form-check {
@@ -193,6 +193,11 @@ export default {
         border: 1px solid black;
         border-radius: 15px;
         font-size: 13px;
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
     }
 
     .btn {
