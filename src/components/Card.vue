@@ -108,14 +108,14 @@ export default {
 
                 this.lat = coord.lat;
                 this.lng = coord.lng;
-                this.loadTrashBins(this.data);
+                this.loadTrashBins(this.data, this.findText);
             });
 
             this.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
 
 // Create the default UI components
             this.ui = H.ui.UI.createDefault(this.map, this.defaultLayers);
-            this.loadTrashBins(this.data);
+            this.loadTrashBins(this.data, this.findText);
         });
 
     },
