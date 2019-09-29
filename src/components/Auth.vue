@@ -26,9 +26,12 @@
             </div>
         </div>
         <div v-if="user.user_id">
-            Привет, {{ user.name }}.
-            У вас на счету {{ user.scores }} баллов.
+            <h1 class="main-title">Привет, {{ user.name }}.</h1>
+            <div>У вас на счету {{ user.scores }} баллов.</div>
+            <button type="submit" class="btn btn-primary btn-change" @click="goToGifts">Обменять бонусы</button>
         </div>
+
+
     </div>
 </template>
 
@@ -62,6 +65,9 @@ export default {
                 this.current();
                 console.log('data', data);
             });
+        },
+        goToGifts(){
+            this.$router.push({ path: 'gifts' });
         },
         reg(){
             fetch('https://trashbin.dev.sa-wd.ru/api/v1/auth/register',{

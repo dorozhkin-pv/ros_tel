@@ -20,6 +20,7 @@ import Legend from './components/Legend.vue'
 import NewPoint from './components/NewPoint.vue'
 import Qr from './components/Qr.vue'
 import Social from './components/Social.vue'
+import Gifts from './components/Gifts.vue'
 
 export default new Router({
   routes: [
@@ -98,6 +99,11 @@ export default new Router({
           path: '/soc',
           name: 'soc',
           component: Social
+      },
+      {
+          path: '/gifts',
+          name: 'gifts',
+          component: Gifts
       }
   ]
 })
