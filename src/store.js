@@ -9,7 +9,6 @@ export default new Vuex.Store({
   		{page: '/auth', name: 'Вход и профиль'},
   	    {page: '/', name: 'Главная страница'},
   	    {page: 'card', name: 'Карта пунктов утилизации'},
-  	    {page: 'game', name: 'Игра "Smart Sorting"'},
   	    {page: 'company', name: 'Компаниям'},
   	    {page: 'callback', name: 'Обратная связь'},
   	    {page: 'policy', name: 'Политика конфидециальности'},

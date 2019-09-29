@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-full" @click="goToCard">Найти</button>
+        <button type="submit" class="btn btn-primary" @click="goToCard">Найти</button>
 
         <div class="description" v-if="header">
             
@@ -178,9 +178,9 @@ export default {
         height: 50px;
         color: white;
         background-color: #013220;
-        /* position: absolute;
+        position: absolute;
         bottom: 0;
-        left:0; */
+        left:0;
     }
 
     .form-check {
